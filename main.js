@@ -1,31 +1,42 @@
+window.onload = function() {
+    getCocktails()
+  
+  }
+
+
+
 // first, require the dotenv package's config file
 
 
-// look at all the processes
-require('dotenv').config()
-
-// put the secret key in a var
-const api_key = process.env.SECRET_KEY
 
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': api_key,
-		'X-RapidAPI-Host': 'the-cocktail-db.p.rapidapi.com'
-	}
-};
-
-const baseAPI= 'https://the-cocktail-db.p.rapidapi.com/search.php?s='
-let searchLiquor = document.getElementById('id').value
-let fullAPI = baseAPI + searchLiquor
+const baseAPI= 'https://www.thecocktaildb.com/api/json/v1/1/random.php'
+let searchCocktails = document.getElementById('fetch').value
+let fullAPI = baseAPI + searchCocktails
+let cocktail = []
 
 
-fetch(fullAPI, options)
+
+const getCocktails = () => {
+    fetch(fullAPI)
 	.then(response => response.json())
 	.then(response => console.log(response))
+    .then(data => cocktail = data)
 	.catch(err => console.error(err));
+}
 
+
+
+
+// const displayPost = () => {
+//     const allDrinks = document.getElementById('alcohols')
+//     arrayOfPosts.map((post, index) => {
+//       const li = document.createElement('li')
+//       const text = document.createTextNode(`#${index}, Title: ${post.title}:  ${post.body}, by user: ${post.userId}`)
+//       li.appendChild(text)
+//       allPosts.append(li)
+//     })
+//   }
 
 /**
  * sign up for an api key
